@@ -10,22 +10,12 @@
           Ciudad Serdán Pruebla. Méx.
         </body>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#" v-on:click="Insertar_Ven">Insertar</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" v-on:click="Actualizar_re">Actualizar</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" v-on:click="Eliminar_re">Eliminar</a>
-            </li>
-          </ul>   
+          
               <!-- <input class="confondo_" type="text" name="nombre" id="IDCONSULTA"  size="30"/>-->
               <v-col
             cols="12"
-            sm="6"
-             md="4"
+            sm="10"
+             md="8"
             >
             <v-text-field id="IDCONSULTA"
             dense
