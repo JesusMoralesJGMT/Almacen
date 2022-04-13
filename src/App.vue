@@ -21,7 +21,17 @@
               <a class="nav-link" href="#" v-on:click="Eliminar_re">Eliminar</a>
             </li>
           </ul>   
-              <input class="confondo_" type="text" name="nombre" id="IDCONSULTA"  size="30"/>
+              <!-- <input class="confondo_" type="text" name="nombre" id="IDCONSULTA"  size="30"/>-->
+              <v-col
+            cols="12"
+            sm="6"
+             md="4"
+            >
+            <v-text-field id="IDCONSULTA"
+            dense
+            label="Consulta"
+            ></v-text-field>
+             </v-col>
               <div class="input-group-append" id="_consultar">
                 <!--<input id="click_Consul" type="submit" value="Consultar" onclick="consultar();"/>-->
                 <button class="boton_" v-on:click="Consultar_re">Consultar</button>
@@ -190,6 +200,63 @@
 
     </div>
     <!--Fin de dirección de clientes-->
+    <!--Incio Botón-->
+    <div v-if="ocultar_crud === true">
+       <v-card id="create">
+    <v-container fluid>   
+    </v-container>
+    <v-speed-dial
+      v-model="fab"
+      :top="top"
+      :bottom="bottom"
+      :right="right"
+      :direction="direction"
+      :open-on-hover="hover"
+      :transition="transition"
+    >
+      <template v-slot:activator>
+        <v-btn 
+          v-model="fab"
+          color="blue darken-2"
+          dark
+          fab
+        >
+          <v-icon v-if="fab">
+            mdi-close
+          </v-icon>
+          <v-icon v-else>
+            mdi-account-circle
+          </v-icon>
+        </v-btn>
+      </template>
+      <v-btn @click="Actualizar_re" 
+        fab
+        dark
+        small
+        color="#15f600"
+      >
+        <v-icon>mdi-pencil</v-icon>
+      </v-btn>
+      <v-btn v-on:click="Insertar_Ven"
+        fab
+        dark
+        small
+        color="#288BA8"
+      >
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
+      <v-btn v-on:click="Eliminar_re"
+        fab
+        dark
+        small
+        color="#db0100"
+      >
+        <v-icon>mdi-delete</v-icon>
+      </v-btn>
+    </v-speed-dial>
+  </v-card>
+    </div>
+    <!--Fin de dirección de clientes-->
     <div v-if="!imagenes_muestra === false">
       <img src="@/assets/PLAN.png">
       <img src="@/assets/AUD.jpg" width="300" height="300" class="d-inline-block align-top" alt="">
@@ -277,19 +344,45 @@ export default {
     drawer: false,
     group: null,
     muestra_mapa: false,
-    Entrega: true
+    Entrega: true,
+    direction: 'bottom',
+      fab: false,
+      fling: false,
+      hover: false,
+      tabs: null,
+      top: true,
+      right: false,
+      bottom: false,
+      left: true,
+      transition: 'slide-x-transition',
+      ocultar_crud: null,
     }),
+     watch: {
+      top (val) {
+        this.bottom = !val
+      },
+      right (val) {
+        this.left = !val
+      },
+      bottom (val) {
+        this.top = !val
+      },
+      left (val) {
+        this.right = !val
+      },
+    },
 
-    watch: {
+    watch_: {
       group () {
         this.drawer = false
       },
     },
   created() {//SE CARGAN Y MUESTRAN TODOS LOS REGISTROS. 
-    axios.get("http://192.168.1.76:4027/ConsultarDB/Tabla_Prod").then((result) => {
+    axios.get("http://localhost:4027/ConsultarDB/Tabla_Prod").then((result) => {
       this.muestra = true;
       this.muestra_ = false;
       this.muestra_cie = false;
+      this.ocultar_crud = true;
       this.result = result.data;
       console.log("fols")
     })
@@ -340,6 +433,8 @@ export default {
         this.muestra_cie = true;
         this.imagenes_muestra= false;
         this.Entrega = false;
+        this.ocultar_crud=false;
+        this.muestravenRe=false;
         this.His_Cle = result.data;
       })
     },
@@ -388,7 +483,7 @@ export default {
       method: 'POST',
       url: 'http://localhost:3000/api/users/login',
       headers: {'Content-Type': 'application/json'},
-      data: {email: 'roous.baez@gmail.com', password: 'Baez12345'}
+      data: {email: 'roous.baez@gmail.com', password: 'antaco1497'}
     }
     axios.request(options).then((response) => {
     this.Login = response.data.success;
@@ -487,4 +582,11 @@ border-radius: 50px; /*bordes redondos*/
     border-radius: 15px;
     border: 3px double #92d595;
  }
+ #create .v-speed-dial {
+    position: absolute;
+  }
+
+  #create .v-btn--floating {
+    position: relative;
+  }
 </style>
