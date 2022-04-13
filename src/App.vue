@@ -331,6 +331,7 @@ export default {
     muesravenAct: null,
     imagenes_muestra: true,
     Login: null,
+    Login_:null,
     drawer: false,
     group: null,
     muestra_mapa: false,
@@ -360,12 +361,9 @@ export default {
       left (val) {
         this.right = !val
       },
-    },
-
-    watch_: {
       group () {
         this.drawer = false
-      },
+      }
     },
   created() {//SE CARGAN Y MUESTRAN TODOS LOS REGISTROS. 
     axios.get("http://localhost:4027/ConsultarDB/Tabla_Prod").then((result) => {
@@ -376,6 +374,31 @@ export default {
       this.result = result.data;
       console.log("fols")
     })
+    /*const options_ = {
+     method: 'POST',
+     url: 'http://localhost:4027/api/login',
+    };
+    axios.request(options_).then((result) => {
+      this.Login_ = result.data
+      console.log(this.Login_.token)
+
+      
+    })*/
+
+    /*var ConsultaT = {
+      method: 'GET',
+      url: 'http://localhost:4027/ConsultarDB/Tabla_Prod',
+      headers: {
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJwYXNzd29yZCI6ImFudGFjbzE0OTciLCJlbWFpbCI6InJvb3VzLmJhZXpAZ21haWwuY29tIn0sImlhdCI6MTY0OTg4NDUxNywiZXhwIjoxNjQ5ODg0NTQ5fQ.5guVtZMayddAh3KJfed3NR1SkISRide5KR5HfZ0k4t0'//this.Login_.token
+      }
+    }
+    axios.request(ConsultaT).then((result) => {
+      this.result = result.data
+      //console.log(this.Login_.token)
+    })*/
+
+ //-----
+    
   },
   methods: {
     Estado_Entre: function(){
