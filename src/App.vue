@@ -243,6 +243,14 @@
       >
         <v-icon>mdi-delete</v-icon>
       </v-btn>
+      <v-btn v-on:click="Muestra_Direc"
+        fab
+        dark
+        small
+        color="#FFC300"
+      >
+        <v-icon>mdi-arrow-left</v-icon>
+      </v-btn>
     </v-speed-dial>
   </v-card>
     </div>
@@ -492,7 +500,7 @@ export default {
       document.getElementById("CATEGORIAPRO").value = " ";
     },
     Insertar: function(){//FUNCIÓN PARA INSERTAR UN NUEVO REGISTRO
-       const options = {
+    const options = {
       method: 'POST',
       url: 'http://localhost:3000/api/users/login',
       headers: {'Content-Type': 'application/json'},
