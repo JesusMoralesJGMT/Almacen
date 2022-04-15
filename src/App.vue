@@ -161,7 +161,7 @@
           </v-list-item>
 
           <v-list-item>
-            <v-list-item-title>Observaciones</v-list-item-title>
+            <v-list-item-title v-on:click="Observaciones_">Ficha Ciente</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>
@@ -169,6 +169,54 @@
 
     <v-card-text>
     <section class="mapa">
+       <div  v-if="muestra_observaciones === true">
+  <v-app>
+    <v-card
+      class="mx-auto elevation-100"
+      color="dark"
+      dark
+      style="max-width: 400px;"
+    >
+      <v-row justify="space-between">
+        <v-col cols="8">
+          <v-card-title>
+            <div>
+              <div class="text-h5">
+                Ana Rosa Baéz
+              </div>
+              <div>Total de Compras: 12</div>
+              <div>Fecha de registro: 2019</div>
+            </div>
+          </v-card-title>
+        </v-col>
+        <v-img
+          class="shrink ma-2"
+          contain
+          height="125px"
+          src="https://i.pinimg.com/474x/fd/75/f6/fd75f6db79d0a65acc055b17a5418f8d.jpg"
+          style="flex-basis: 125px"
+        ></v-img>
+      </v-row>
+      <v-divider dark></v-divider>
+      <v-card-actions class="pa-4">
+        Calificación de empleado
+        <v-spacer></v-spacer>
+        <span class="grey--text text--lighten-2 text-caption mr-2">
+          ({{ rating }})
+        </span>
+        <v-rating
+          v-model="rating"
+          background-color="white"
+          color="yellow accent-4"
+          dense
+          half-increments
+          hover
+          size="18"
+        ></v-rating>
+      </v-card-actions>
+    </v-card>
+  </v-app>
+</div>
      <div class="center"  v-if="muestra_mapa === true">
           <div class="columna mapa">
             <iframe src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=es&amp;q=San%20Francisco%20Cuautlancingo,%20Puebla+(San%20Francisco%20Cuautlancingo,%20Puebla)&amp;t=h&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" width="1200" height="300" frameborder="0" style="border:1" allowfullscreen></iframe>
@@ -243,10 +291,21 @@
       >
         <v-icon>mdi-delete</v-icon>
       </v-btn>
+      <v-btn v-on:click="Muestra_Direc"
+        fab
+        dark
+        small
+        color="#FFC300"
+      >
+        <v-icon>mdi-arrow-left</v-icon>
+      </v-btn>
     </v-speed-dial>
   </v-card>
     </div>
     <!--Fin de dirección de clientes-->
+    <!--Inicio de Observaciones-->
+    
+    <!--Inicio de Observaciones-->
     <div v-if="!imagenes_muestra === false">
       <img src="@/assets/PLAN.png">
       <img src="@/assets/AUD.jpg" width="300" height="300" class="d-inline-block align-top" alt="">
@@ -330,22 +389,25 @@ export default {
     muestravenRe: null,
     muesravenAct: null,
     imagenes_muestra: true,
+    muestra_observaciones: false,
     Login: null,
+    Login_:null,
     drawer: false,
     group: null,
     muestra_mapa: false,
     Entrega: true,
     direction: 'bottom',
-      fab: false,
-      fling: false,
-      hover: false,
-      tabs: null,
-      top: true,
-      right: false,
-      bottom: false,
-      left: true,
-      transition: 'slide-x-transition',
-      ocultar_crud: null,
+    fab: false,
+    fling: false,
+    hover: false,
+    tabs: null,
+    top: true,
+    right: false,
+    bottom: false,
+    left: true,
+    transition: 'slide-x-transition',
+    ocultar_crud: null,
+    rating: 4.3,
     }),
      watch: {
       top (val) {
@@ -360,15 +422,21 @@ export default {
       left (val) {
         this.right = !val
       },
-    },
-
-    watch_: {
       group () {
         this.drawer = false
-      },
+      }
     },
   created() {//SE CARGAN Y MUESTRAN TODOS LOS REGISTROS. 
-    axios.get("http://localhost:4027/ConsultarDB/Tabla_Prod").then((result) => {
+  const options = {
+      method: 'POST',
+      url: 'http://localhost:3000/api/users/login',
+      headers: {'Content-Type': 'application/json'},
+      data: {email: 'roous.baez@gmail.com', password: 'Baez12345'}
+    }
+    axios.request(options).then((response) => {
+    this.Login = response.data.success;
+     if(this.Login){
+      axios.get("http://localhost:4027/ConsultarDB/Tabla_Prod").then((result) => {
       this.muestra = true;
       this.muestra_ = false;
       this.muestra_cie = false;
@@ -376,25 +444,48 @@ export default {
       this.result = result.data;
       console.log("fols")
     })
+    }
+    else{
+       alert(response.data.msg)
+    }
+    })
+    
   },
   methods: {
-    Estado_Entre: function(){
-      this.Entrega = true;
+    Observaciones_: function(){//FUNCIÓN PARA VER LAS OBSERVACIONES Y LA CREDENCIAL DEL REGISTRO. 
+      this.muestra_observaciones = true;
+      this.Entrega = false;
       this.muestra_mapa = false;
     },
-    Muestra_Direc: function(){
+    Estado_Entre: function(){//FUNCIÓN PARA MOSTRAR EL ESTADO DE LA ENTREGA.
+      this.Entrega = true;
+      this.muestra_mapa = false;
+      this.muestra_observaciones = false;
+    },
+    Muestra_Direc: function(){//FUNCION PARA MOSTRAR LA VENTANA PRINCIPAL.
       //this.$router.push('about');
       window.location.href = "http://localhost:8080/about"
       this.muestra_mapa = false
       this.Entrega = false;
+       this.muestra_observaciones = false;
     },
     Muestra_Direc_: function(){
       this.muestra_mapa = true;
       this.Entrega = false;
+      this.muestra_observaciones = false;
     },
     Consultar_re: function() {//FUNCION PARA CONSULTAR REGISTROS
       //this.result = null
-      let ConsultaPro = document.getElementById("IDCONSULTA").value; 
+      const options = {
+      method: 'POST',
+      url: 'http://localhost:3000/api/users/login',
+      headers: {'Content-Type': 'application/json'},
+      data: {email: 'roous.baez@gmail.com', password: 'Baez12345'}
+    }
+    axios.request(options).then((response) => {
+    this.Login = response.data.success;
+     if(this.Login){
+        let ConsultaPro = document.getElementById("IDCONSULTA").value; 
       if (ConsultaPro.length < 24){
         alert("La clave deve de contener 24 catarteres")
       }else
@@ -404,6 +495,11 @@ export default {
         this.muestra_cie = false;
         this.result = result.data;
         this.Entrega = false;
+      })
+    }
+    else{
+       alert(response.data.msg)
+    }
     })
     },
     Eliminar_re: function() {//FUNCIÓN PARA ELIMINAR UN REGISTRO EN ESPECIFICO
@@ -469,11 +565,11 @@ export default {
       document.getElementById("CATEGORIAPRO").value = " ";
     },
     Insertar: function(){//FUNCIÓN PARA INSERTAR UN NUEVO REGISTRO
-       const options = {
+    const options = {
       method: 'POST',
       url: 'http://localhost:3000/api/users/login',
       headers: {'Content-Type': 'application/json'},
-      data: {email: 'roous.baez@gmail.com', password: 'antaco1497'}
+      data: {email: 'roous.baez@gmail.com', password: 'Baez12345'}
     }
     axios.request(options).then((response) => {
     this.Login = response.data.success;
@@ -498,7 +594,16 @@ export default {
     })
     },
     Insertar_Act: function(){//FUNCIÓN PARA ACTUALIZAR UN REGISTRO. 
-      let _ID         = document.getElementById("IDCLAVEPROD").value; 
+    const options = {
+      method: 'POST',
+      url: 'http://localhost:3000/api/users/login',
+      headers: {'Content-Type': 'application/json'},
+      data: {email: 'roous.baez@gmail.com', password: 'Baez12345'}
+    }
+    axios.request(options).then((response) => {
+    this.Login = response.data.success;
+     if(this.Login){
+       let _ID         = document.getElementById("IDCLAVEPROD").value; 
       let _NOMBRE     = document.getElementById("NOMBREPROD").value;
       let _IMAGEN     = document.getElementById("IMAGENPROD").value;
       let _DESCIPCION = document.getElementById("DESCRIPCIONPROD").value;
@@ -511,6 +616,11 @@ export default {
             this.result = result.data;
             this.Consultar_re();
           })
+    }
+    else{
+       alert(response.data.msg)
+    }
+    })
     }
   }
 };
