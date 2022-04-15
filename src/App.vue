@@ -11,7 +11,7 @@
         </body>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           
-              <!-- <input class="confondo_" type="text" name="nombre" id="IDCONSULTA"  size="30"/>-->
+              
               <v-col
             cols="12"
             sm="10"
