@@ -7,7 +7,7 @@
         </a>
         <body>
           VENTA DE ELECTRONICA Y EQUIPO DE COMPUTO <br>
-          Ciudad Serdán Pruebla. Méx.
+          Ciudad Serdán Puebla, México.
         </body>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           
