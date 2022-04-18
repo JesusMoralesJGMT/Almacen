@@ -1,5 +1,73 @@
 <template>
-  <div>
+<div>
+  <div v-if="Muestra_Login === true">
+    <div>
+    <div>
+    <v-toolbar
+      dark
+      prominent
+      src="https://sistemas418865595.files.wordpress.com/2018/10/blockchain-g.gif?w=660&zoom=2"
+    >
+      <v-toolbar-title>Venta de electrónica y equipo de computo</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+    </v-toolbar>
+  </div>
+   <div>
+   <v-app id="inspire">
+      <v-content>
+         <v-container fluid fill-height>
+            <v-layout align-center justify-center>
+               <v-flex xs12 sm8 md4>
+                  <v-card class="elevation-12">
+                     <v-toolbar dark color="primary">
+                        <v-toolbar-title>Login form</v-toolbar-title>
+                     </v-toolbar>
+                     <v-card-text>
+                        <v-form>
+                           <v-text-field
+                              prepend-icon=mdi-account-circle
+                              name="login"
+                              label="Login"
+                              type="text"
+                           ></v-text-field>
+                           <v-text-field
+                              id="password"
+                              prepend-icon="mdi-key"
+                              name="password"
+                              label="Password"
+                              type="password"
+                           ></v-text-field>
+                        </v-form>
+                     </v-card-text>
+                     <template>
+                      <div>
+                     <v-card-actions>
+                        <v-spacer></v-spacer>
+                       
+                       
+                        <!--<router-link class="btn btn-primary " :to="{name:'/about'}">Login</router-link>-->
+                        <v-btn v-on:click="Login200">Login</v-btn>
+                       
+                  
+                  
+                     </v-card-actions>
+                       </div>
+                     </template>
+                  </v-card>
+               </v-flex>
+            </v-layout>
+         </v-container>
+      </v-content>
+   </v-app>
+   </div>
+  </div>
+  </div>
+  <!--Elyisuswe-->
+  <div v-if="Muestra_Login === false">
+   <div>
+
+    <!--Comienza la página web-->
     <div>
       <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #A8E878;">
         <a class="navbar-brand" href="#">
@@ -374,13 +442,20 @@
     </div>
     <!--Fin Actualizar-->
   </div>
+    <!--Fin Actualizar-->
+  </div>
+</div>
 </template>
-
 <script>
 import axios from "axios";
 //let consu = document.getElementById("IDCONSULTA").value;
 export default {
   data: () => ({
+    name: 'Login',
+    Muestra_Login: true,
+    props: {
+      source: String,
+    },
     result: null,
     His_Cle: null,
     muestra: null,
@@ -431,7 +506,7 @@ export default {
       method: 'POST',
       url: 'http://localhost:3000/api/users/login',
       headers: {'Content-Type': 'application/json'},
-      data: {email: 'roous.baez@gmail.com', password: 'Baez12345'}
+      data: {email: 'bae.em29@gmail.com', password: 'taco1497'}
     }
     axios.request(options).then((response) => {
     this.Login = response.data.success;
@@ -451,7 +526,11 @@ export default {
     })
     
   },
-  methods: {
+  methods: 
+    {
+      Login200: function(){
+      this.Muestra_Login = false;
+    }, 
     Observaciones_: function(){//FUNCIÓN PARA VER LAS OBSERVACIONES Y LA CREDENCIAL DEL REGISTRO. 
       this.muestra_observaciones = true;
       this.Entrega = false;
@@ -468,6 +547,7 @@ export default {
       this.muestra_mapa = false
       this.Entrega = false;
        this.muestra_observaciones = false;
+       this.Muestra_Login=false;
     },
     Muestra_Direc_: function(){
       this.muestra_mapa = true;
@@ -480,7 +560,7 @@ export default {
       method: 'POST',
       url: 'http://localhost:3000/api/users/login',
       headers: {'Content-Type': 'application/json'},
-      data: {email: 'roous.baez@gmail.com', password: 'Baez12345'}
+      data: {email: 'bae.em29@gmail.com', password: 'taco1497'}
     }
     axios.request(options).then((response) => {
     this.Login = response.data.success;
@@ -569,7 +649,7 @@ export default {
       method: 'POST',
       url: 'http://localhost:3000/api/users/login',
       headers: {'Content-Type': 'application/json'},
-      data: {email: 'roous.baez@gmail.com', password: 'Baez12345'}
+      data: {email: 'bae.em29@gmail.com', password: 'taco1497'}
     }
     axios.request(options).then((response) => {
     this.Login = response.data.success;
@@ -598,7 +678,7 @@ export default {
       method: 'POST',
       url: 'http://localhost:3000/api/users/login',
       headers: {'Content-Type': 'application/json'},
-      data: {email: 'roous.baez@gmail.com', password: 'Baez12345'}
+      data: {email: 'bae.em29@gmail.com', password: 'taco1497'}
     }
     axios.request(options).then((response) => {
     this.Login = response.data.success;
@@ -690,3 +770,7 @@ border-radius: 50px; /*bordes redondos*/
     position: relative;
   }
 </style>
+    
+
+
+
