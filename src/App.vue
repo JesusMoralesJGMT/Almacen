@@ -2,23 +2,22 @@
 <div>
   <div v-if="Muestra_Login === true">
     <div>
-    <div>
-    <v-toolbar
-      dark
-      prominent
-      src="https://sistemas418865595.files.wordpress.com/2018/10/blockchain-g.gif?w=660&zoom=2"
-    >
-      <v-toolbar-title>Venta de electrónica y equipo de computo</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-    </v-toolbar>
-  </div>
-   <div>
-   <v-app id="inspire">
-      <v-content>
-         <v-container fluid fill-height>
-            <v-layout align-center justify-center>
-               <v-flex xs12 sm8 md4>
+      <div>
+        <v-toolbar
+          dark
+          prominent
+          src="https://sistemas418865595.files.wordpress.com/2018/10/blockchain-g.gif?w=660&zoom=2"
+        >
+          <v-toolbar-title>Venta de electrónica y equipo de computo</v-toolbar-title>
+          <v-spacer></v-spacer>
+        </v-toolbar>
+      </div>
+      <div>
+        <v-app id="inspire">
+          <v-content>
+            <v-container fluid fill-height>
+              <v-layout align-center justify-center>
+                <v-flex xs12 sm8 md4>
                   <v-card class="elevation-12">
                      <v-toolbar dark color="primary">
                         <v-toolbar-title>Login form</v-toolbar-title>
@@ -28,7 +27,8 @@
                            <v-text-field
                               prepend-icon=mdi-account-circle
                               name="login"
-                              label="Login"
+                              id="LOGINUSER"
+                              label="E-mail"
                               type="text"
                            ></v-text-field>
                            <v-text-field
@@ -181,14 +181,15 @@
       prominent
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      
       <v-spacer>
         <div v-if="Entrega === true">
           El producto se encuentra en Camino<br>
-        <h5>fecha estimada de entrega: 16/04/2022<br></h5>
+        <h5>fecha estimada de entrega: 24/04/2022<br></h5>
         <h5>Hora estimada de entrega: 13:30 hrs<br></h5>
         </div>
       </v-spacer> 
-      <div v-if="Entrega === true">
+      <div v-if="Entrega === true"> 
         <img src="@/assets/EnViaje.gif" width="126" height="126" class="d-inline-block align-top" alt="">  
         <img src="@/assets/EnViaje.gif" width="126" height="126" class="d-inline-block align-top" alt=""> 
         <img src="@/assets/EnViaje.gif" width="126" height="126" class="d-inline-block align-top" alt=""> 
@@ -441,18 +442,26 @@
   </div>
     <!--Fin Actualizar-->
   </div>
+  <di v-if="Cargando_ === true">
+    <hola></hola>
+  </di>
 </div>
 </template>
 <script>
 import axios from "axios";
+import Hola from "./components/Ejemplo.vue"
 //let consu = document.getElementById("IDCONSULTA").value;
 export default {
+  components:{
+    Hola
+  },
   data: () => ({
     name: 'Login',
     Muestra_Login: true,
     props: {
       source: String,
     },
+    Cargando_: false,
     result: null,
     His_Cle: null,
     muestra: null,
@@ -528,8 +537,34 @@ export default {
     })
     },
     Login200: function(){
-      this.Muestra_Login = false;
+    let correo     = document.getElementById("LOGINUSER").value; 
+    let contrasena = document.getElementById("password").value;
+    const options = {
+      method: 'POST',
+      url: 'http://localhost:3000/api/users/login',
+      headers: {'Content-Type': 'application/json'},
+      data: {email: correo, password: contrasena}
+    }
+    axios.request(options).then((response) => {
+    this.Login = response.data.success;
+     if(this.Login === true){
+       this.Muestra_Login = null;
+       this.Cargando_ = true;
+       //setTimeout()
+       setInterval(this.Cargalogin(), 30000);
+       //this.Muestra_Login = false;
+    }
+    else{
+       alert(response.data.msg)
+       //this.Muestra_Login = null;
+       //this.Cargando_ = true
+    }
+    })
     }, 
+    Cargalogin: function(){
+      this.Muestra_Login = false;
+      this.Cargando_ = false;
+    },
     Observaciones_: function(){//FUNCIÓN PARA VER LAS OBSERVACIONES Y LA CREDENCIAL DEL REGISTRO. 
       this.muestra_observaciones = true;
       this.Entrega = false;
@@ -542,7 +577,10 @@ export default {
     },
     Muestra_Direc: function(){//FUNCION PARA MOSTRAR LA VENTANA PRINCIPAL.
       //this.$router.push('about');
-      window.location.href = "http://localhost:8080/about"
+      //window.location.href = "http://localhost:8080/about"
+      this.Carga_Inicial();
+      this.muesravenAct = false;
+      this.imagenes_muestra = true;
       this.muestra_mapa = false
       this.Entrega = false;
        this.muestra_observaciones = false;
@@ -559,7 +597,7 @@ export default {
       method: 'POST',
       url: 'http://localhost:3000/api/users/login',
       headers: {'Content-Type': 'application/json'},
-      data: {email: 'bae.em29@gmail.com', password: 'taco1497'}
+      data: {email: 'roous.baez@gmail.com', password: 'Baez12345'}
     }
     axios.request(options).then((response) => {
     this.Login = response.data.success;
@@ -569,6 +607,7 @@ export default {
         alert("La clave deve de contener 24 catarteres")
       }else
         axios.get("http://localhost:4027/"+ConsultaPro).then((result) => {
+        this.muestravenRe = false;
         this.muestra = false;
         this.muestra_ = true;
         this.muestra_cie = false;
@@ -583,13 +622,28 @@ export default {
     },
     Eliminar_re: function() {//FUNCIÓN PARA ELIMINAR UN REGISTRO EN ESPECIFICO
       let ConsultaPro = document.getElementById("IDCONSULTA").value;
+      const options = {
+      method: 'POST',
+      url: 'http://localhost:3000/api/users/login',
+      headers: {'Content-Type': 'application/json'},
+      data: {email: 'roous.baez@gmail.com', password: 'Baez12345'}
+    }
+    axios.request(options).then((response) => {
+    this.Login = response.data.success;
+     if(this.Login === true){
       if(!this.muestra_){
         alert("Para eliminar un registro primero debe de realizar la consulta del mismo") 
       }else
       axios.delete("http://localhost:4027/delete/"+ConsultaPro).then((result) =>{
           this.result = result.data;
-          location.reload();
+          this.Carga_Inicial();
+          //location.reload();
         })
+    }
+    else{
+       alert(response.data.msg)
+    }
+    })
     },
     Muesra_Historial_Clientes: function(){//FUNCIÓN PARA CONSULTAR REGISTRO DE HISTORIAL DE CLIENTES
       axios.get("http://localhost:4027/clientes/").then((result) =>{
@@ -678,7 +732,7 @@ export default {
       method: 'POST',
       url: 'http://localhost:3000/api/users/login',
       headers: {'Content-Type': 'application/json'},
-      data: {email: 'bae.em29@gmail.com', password: 'taco1497'}
+      data: {email: 'roous.baez@gmail.com', password: 'Baez12345'}
     }
     axios.request(options).then((response) => {
     this.Login = response.data.success;
