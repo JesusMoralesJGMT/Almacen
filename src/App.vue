@@ -44,14 +44,11 @@
                       <div>
                      <v-card-actions>
                         <v-spacer></v-spacer>
-                       
-                       
                         <!--<router-link class="btn btn-primary " :to="{name:'/about'}">Login</router-link>-->
                         <v-btn v-on:click="Login200">Login</v-btn>
                        
-                  
-                  
                      </v-card-actions>
+                   
                        </div>
                      </template>
                   </v-card>
