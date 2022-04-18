@@ -502,11 +502,16 @@ export default {
       }
     },
   created() {//SE CARGAN Y MUESTRAN TODOS LOS REGISTROS. 
-  const options = {
+  this.Carga_Inicial();
+  },
+  methods: 
+    {
+    Carga_Inicial: function(){
+      const options = {
       method: 'POST',
       url: 'http://localhost:3000/api/users/login',
       headers: {'Content-Type': 'application/json'},
-      data: {email: 'bae.em29@gmail.com', password: 'taco1497'}
+      data: {email: 'roous.baez@gmail.com', password: 'Baez12345'}
     }
     axios.request(options).then((response) => {
     this.Login = response.data.success;
@@ -524,11 +529,8 @@ export default {
        alert(response.data.msg)
     }
     })
-    
-  },
-  methods: 
-    {
-      Login200: function(){
+    },
+    Login200: function(){
       this.Muestra_Login = false;
     }, 
     Observaciones_: function(){//FUNCIÓN PARA VER LAS OBSERVACIONES Y LA CREDENCIAL DEL REGISTRO. 
@@ -649,7 +651,7 @@ export default {
       method: 'POST',
       url: 'http://localhost:3000/api/users/login',
       headers: {'Content-Type': 'application/json'},
-      data: {email: 'bae.em29@gmail.com', password: 'taco1497'}
+      data: {email: 'roous.baez@gmail.com', password: 'Baez12345'}
     }
     axios.request(options).then((response) => {
     this.Login = response.data.success;
@@ -665,7 +667,8 @@ export default {
       }else
          axios.post("http://localhost:4027/post/Ins/"+_ID+"/"+_NOMBRE+"/"+_IMAGEN+"/"+_PRECIO+"/"+_CATEGORIA+"/"+_DESCIPCION).then((result) =>{
           this.result = result.data;
-          location.reload();
+          this.Carga_Inicial();
+          //location.reload();
          })
     }
     else{
