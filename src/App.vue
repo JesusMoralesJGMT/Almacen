@@ -46,7 +46,7 @@
                         <v-spacer></v-spacer>
                         <!--<router-link class="btn btn-primary " :to="{name:'/about'}">Login</router-link>-->
                         <v-btn v-on:click="Login200">Login</v-btn>
-                       
+                         <v-btn v-on:click="RegistroUsu">Registrar</v-btn>
                      </v-card-actions>
                    
                        </div>
@@ -443,17 +443,17 @@
     <!--Fin Actualizar-->
   </div>
   <di v-if="Cargando_ === true">
-    <hola></hola>
+  <hola></hola>
   </di>
 </div>
 </template>
 <script>
 import axios from "axios";
-import Hola from "./components/Ejemplo.vue"
+import Hola from "./components/Registrar_Usuario.vue"
 //let consu = document.getElementById("IDCONSULTA").value;
 export default {
   components:{
-    Hola
+   Hola
   },
   data: () => ({
     name: 'Login',
@@ -517,7 +517,7 @@ export default {
       method: 'POST',
       url: 'http://localhost:3000/api/users/login',
       headers: {'Content-Type': 'application/json'},
-      data: {email: 'roous.baez@gmail.com', password: 'Baez12345'}
+      data: {email: 'bae.em29@gmail.com', password: 'taco1497'}
     }
     axios.request(options).then((response) => {
     this.Login = response.data.success;
@@ -536,6 +536,10 @@ export default {
     }
     })
     },
+    RegistroUsu: function(){
+       this.Cargando_ = true;
+       this.Muestra_Login = null;
+    },
     Login200: function(){
     let correo     = document.getElementById("LOGINUSER").value; 
     let contrasena = document.getElementById("password").value;
@@ -548,16 +552,17 @@ export default {
     axios.request(options).then((response) => {
     this.Login = response.data.success;
      if(this.Login === true){
-       this.Muestra_Login = null;
-       this.Cargando_ = true;
+       //this.Muestra_Login = null;
+       //this.Cargando_ = true;
        //setTimeout()
        setInterval(this.Cargalogin(), 30000);
        //this.Muestra_Login = false;
     }
     else{
-       alert(response.data.msg)
+       //alert(response.data.msg)
        //this.Muestra_Login = null;
        //this.Cargando_ = true
+       this.Cargando_ = true;
     }
     })
     }, 
