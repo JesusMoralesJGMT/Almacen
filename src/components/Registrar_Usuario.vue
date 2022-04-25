@@ -4,6 +4,7 @@
    <v-parallax
     dark
     src="https://media3.giphy.com/media/ITRemFlr5tS39AzQUL/giphy.gif?cid=ecf05e47c4b0807ff33e9e92fd98ade66509a8b5b026c8c1&rid=giphy.gif&ct=g"
+    height="650"
   >
  
      <v-content>
@@ -105,7 +106,7 @@ var config = {
 };
 axios.request(config).then((result) => {
     this.result=result.data.msg
-  this.MensajeAler=true 
+  //this.MensajeAler=true 
   if(result.data.success){
       this.MensajeAler=true 
   }else{
