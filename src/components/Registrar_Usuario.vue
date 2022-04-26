@@ -1,4 +1,5 @@
 <template>
+<!--ABAEZ: 22/04/2022: Se creo diseño para REGISTRAR USUARIO-->
 <div>
    <v-app>
    <v-parallax
@@ -86,9 +87,9 @@ created() {//SE CARGAN Y MUESTRAN TODOS LOS REGISTROS.
   methods: 
     {
        Registrar_Usu: function(){
-            let usuario= document.getElementById("usuario").value;
-            let email= document.getElementById("email").value;
-            let password= document.getElementById("password").value;
+            let usuario= document.getElementById("usuario").value;// EVALUA LO QUE CONTENGA EL INPUT 
+            let email= document.getElementById("email").value;//EVALUA LO QUE CONTENGA EL INPUT 
+            let password= document.getElementById("password").value;//EVALUA LO QUE CONTENGA EL INPUT 
          
 var data = JSON.stringify({
   "name": usuario,
@@ -96,11 +97,11 @@ var data = JSON.stringify({
   "password": password
 });
 
-var config = {
+var config = {//SE AGREGA URL 
   method: 'post',
   url: 'http://localhost:3000/api/users/register',
   headers: { 
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json'//EL FORMATO ES DE TIPO JSON 
   },
   data : data
 };
@@ -123,7 +124,7 @@ axios.request(config).then((result) => {
     },
     Cancelar: function(){//FUNCION PARA MOSTRAR LA VENTANA PRINCIPAL.
       
-      window.location.href = "http://localhost:8080/about"
+      window.location.href = "http://localhost:8081/about"
       
     }
 }
