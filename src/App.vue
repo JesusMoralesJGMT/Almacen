@@ -1,13 +1,15 @@
-<template>
-  <div>
-    <div v-if="Muestra_Login === true">
+<template><!--ABaez 18/04/2022: Se agrega templeade principal-->
+  <div> <!--ABaez 18/04/2022:Se crea div que contendra login y pág-->
+    <div v-if="Muestra_Login === true"><!--ABaez 18/04/2022:Se agrega bandera de inicializacion y div del login-->
       <div>
         <div>
-          <v-toolbar
+          <!--ABaez 18/04/2022: Se agrega toolbar con imagen para diseño de login-->
+          <v-toolbar 
             dark
             prominent
             src="https://sistemas418865595.files.wordpress.com/2018/10/blockchain-g.gif?w=660&zoom=2"
           >
+          <!--ABaez 18/04/2022: Se agrega titulo de la pag-->
             <v-toolbar-title
               >Venta de electrónica y equipo de computo</v-toolbar-title
             >
@@ -26,6 +28,7 @@
                       </v-toolbar>
                       <v-card-text>
                         <v-form>
+                          <!--ABaez 18/04/2022: Se agregan campos del login-->
                           <v-text-field
                             prepend-icon="mdi-account-circle"
                             name="login"
@@ -47,6 +50,7 @@
                           <v-card-actions>
                             <v-spacer></v-spacer>
                             <!--<router-link class="btn btn-primary " :to="{name:'/about'}">Login</router-link>-->
+                            <!--ABaez 18/04/2022: Se agregan botones y se agrega funcionamiento-->
                             <v-btn v-on:click="Login200">Login</v-btn>
                             <v-btn v-on:click="RegistroUsu">Registrar</v-btn>
                           </v-card-actions>
@@ -60,11 +64,14 @@
           </v-app>
         </div>
       </div>
+      <!--ABaez 18/04/2022: Termina login-->
     </div>
     <div v-if="Muestra_Login === false">
       <div>
         <!--Comienza la página web-->
+        <!--ABaez 01/04/2022: Se agrega div de pagina principal-->
         <div>
+        <!--ABaez 18/04/2022: Se comienza barra de navegación-->
           <nav
             class="navbar navbar-expand-lg navbar-light bg-light"
             style="background-color: #a8e878"
@@ -90,6 +97,7 @@
                   label="Consulta"
                 ></v-text-field>
               </v-col>
+               <!--Jesús_Gabriel|->O.o|->>> >>:01/04/2022 Se agrega textfield de consulta y se agrega botón con funcionalidad de consultar -->
               <div class="input-group-append" id="_consultar">
                 <!--<input id="click_Consul" type="submit" value="Consultar" onclick="consultar();"/>-->
                 <button class="boton_" v-on:click="Consultar_re">
@@ -98,6 +106,7 @@
                 <!-- <button v-on:click="Eliminar_re">Eliminar</button>-->
               </div>
             </div>
+            <!--Jesús_Gabriel|->O.o|->>> >>:28/04/2022 Se agrega link a página Historial clientes -->
             <div>
               <a
                 class="nav-link"
@@ -117,6 +126,7 @@
               v-on:click="Buscar"
             ></v-text-field>
           </template>
+          <!--Jesús_Gabriel|->O.o|->>> >>:28/04/2022 Se agrega bandera para iniciar  -->
           <table id="myTable" v-if="muestra_cie === false">
             <colgroup>
               <col style="background-color: #78b0e8" />
@@ -192,6 +202,7 @@
             </tbody>
           </table>
         </div>
+        <!--Jesús_Gabriel|->O.o|->>> >>:13/04/2022 Se agrega en menú didactico direeción de clientes-->
         <!--Incio Dirección de cientes-->
         <div v-if="muestra_cie === true">
           <v-card class="mx-auto overflow-hidden" height="750" width="100%">
@@ -254,7 +265,7 @@
                 />
               </div>
             </v-app-bar>
-
+             <!--Jesús_Gabriel|->O.o|->>> >>:13/04/2022 Se agrega en menú didactico-->
             <v-navigation-drawer v-model="drawer" absolute bottom temporary>
               <v-list nav dense>
                 <v-list-item-group
@@ -281,7 +292,7 @@
                 </v-list-item-group>
               </v-list>
             </v-navigation-drawer>
-
+             <!--ABaez:13/04/2022 Se agrega tarjeta del cliente-->
             <v-card-text>
               <section class="mapa">
                 <div v-if="muestra_observaciones === true">
@@ -334,6 +345,7 @@
                 </div>
                 <div class="center" v-if="muestra_mapa === true">
                   <div class="columna mapa">
+                     <!--ABaez:13/04/2022 Se agrega ubicación del cliente-->
                     <iframe
                       src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=es&amp;q=San%20Francisco%20Cuautlancingo,%20Puebla+(San%20Francisco%20Cuautlancingo,%20Puebla)&amp;t=h&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
                       width="1200"
@@ -412,6 +424,7 @@
           </v-card>
         </div>
         <!--Fin de dirección de clientes-->
+         <!--ABaez:12/04/2022 Se agrega menú fijo y sus funciones-->
         <!--Incio Botón-->
         <div v-if="ocultar_crud === true">
           <v-card id="create">
@@ -448,7 +461,7 @@
         </div>
         <!--Fin de dirección de clientes-->
         <!--Inicio de Observaciones-->
-
+         <!--Jesús_Gabriel|->O.o|->>> >>:13/04/2022 Ficha del cliente-->
         <!--Inicio de Observaciones-->
         <div v-if="!imagenes_muestra === false">
           <img src="@/assets/PLAN.png" />
@@ -467,6 +480,7 @@
             alt=""
           />
         </div>
+         <!--Jesús_Gabriel|->O.o|->>> >>:13/04/2022 Se agrega textfield para registrar porductos-->
         <div v-if="muestravenRe === true">
           <h3 style="text-align: center">Registrando productos</h3>
           <div style="text-align: center">
@@ -527,6 +541,7 @@
                 </select>
               </p>
             </div>
+             <!--ABaez:Botones:13/04/2022 Se agrega botones de insertar, cancelar y limpiar-->
             <div class="columna">
               <p>
                 <button class="Boton" v-on:click="Insertar">
@@ -546,6 +561,7 @@
             </div>
           </div>
         </div>
+        <!--Jesús_Gabriel|->O.o|->>> >>:10/04/2022 Se agrega textfield de actualizar -->
         <!--Actualizar-->
         <div v-if="muesravenAct === true">
           <h3 style="text-align: center">Actualizando productos</h3>
@@ -635,6 +651,8 @@
     </di>
   </div>
 </template>
+
+<!--Se inicia con la programación de metodos, funciones,eventos-->
 <script>
 import axios from "axios";
 import Hola from "./components/Registrar_Usuario.vue";
@@ -643,6 +661,7 @@ export default {
   components: {
     Hola,
   },
+  //Se agregan variables 
   data: () => ({
     name: "Login",
     Muestra_Login: true,
@@ -678,6 +697,7 @@ export default {
     ocultar_crud: null,
     rating: 4.3,
   }),
+  //ABaez: Se agregan variables para el menú fijo
   watch: {
     top(val) {
       this.bottom = !val;
@@ -699,18 +719,19 @@ export default {
     //SE CARGAN Y MUESTRAN TODOS LOS REGISTROS.
     this.Carga_Inicial();
   },
+  //Se declaran los metodos que se utilizaran
   methods: {
-    Buscar: function () {
+    Buscar: function () {//Función que muestra todos los registros de la tabla princial
       document.getElementById("myInput").onkeyup = function () {
         var buscar_ = this.value.toLowerCase();
-        document.querySelectorAll(".table tbody tr").forEach(function (e) {
+        document.querySelectorAll(".table tbody tr").forEach(function (e) {//Selecciona todo lo que esta en la tabla 
           var encontro_ = false;
-          e.querySelectorAll("td").forEach(function (e) {
+          e.querySelectorAll("td").forEach(function (e) {//Si escuentra datos en TD los muestra
             if (e.innerHTML.toLowerCase().indexOf(buscar_) >= 0) {
               encontro_ = true;
             }
           });
-          if (encontro_) {
+          if (encontro_) {//de lo contrario no se muestra la tabla o se muestra vacia 
             e.style.display = "";
           } else {
             e.style.display = "none";
@@ -718,18 +739,19 @@ export default {
         });
       };
     },
+    // Se crea función para login 
     Carga_Inicial: function () {
-      const options = {
-        method: "POST",
-        url: "http://localhost:3000/api/users/login",
-        headers: { "Content-Type": "application/json" },
-        data: { email: "roous.baez@gmail.com", password: "Baez12345" },
+      const options = {//se crea variable "Options"
+        method: "POST",// tipo de metodo 
+        url: "http://localhost:3000/api/users/login",// se ingresa la url 
+        headers: { "Content-Type": "application/json" },//se agregan los headers y que sera de tipo JSON
+        data: { email: "ros_anba@gmail.com", password: "12345" },// contiene los datos de la API "email" y "password"
       };
-      axios.request(options).then((response) => {
+      axios.request(options).then((response) => {//ejecuta el api 
         this.Login = response.data.success;
         if (this.Login) {
           axios
-            .get("http://localhost:4027/ConsultarDB/Tabla_Prod")
+            .get("http://localhost:4027/ConsultarDB/Tabla_Prod")//obtiene los datos de la tabla principal 
             .then((result) => {
               this.muestra = true;
               this.muestra_ = false;
@@ -747,16 +769,18 @@ export default {
       this.Cargando_ = true;
       this.Muestra_Login = null;
     },
+    //ABaez 18/04/2022: Se crea función para login
     Login200: function () {
-      let correo = document.getElementById("LOGINUSER").value;
+      let correo = document.getElementById("LOGINUSER").value;//Se crean variables y se tiene todo lo del documento 
+      //evalua lo que contenga el input 
       let contrasena = document.getElementById("password").value;
-      const options = {
+      const options = {//se crea variable options 
         method: "POST",
         url: "http://localhost:3000/api/users/login",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" },//tipo de formato JSON
         data: { email: correo, password: contrasena },
       };
-      axios.request(options).then((response) => {
+      axios.request(options).then((response) => {//ejecuta el api
         this.Login = response.data.success;
         if (this.Login === true) {
           //this.Muestra_Login = null;
@@ -784,13 +808,13 @@ export default {
       this.muestra_mapa = false;
     },
     Estado_Entre: function () {
-      //FUNCIÓN PARA MOSTRAR EL ESTADO DE LA ENTREGA.
+      //Jesús_Gabriel|->O.o|->>> >>: SE CREA FUNCIÓN PARA MOSTRAR EL ESTADO DE LA ENTREGA.
       this.Entrega = true;
       this.muestra_mapa = false;
       this.muestra_observaciones = false;
     },
     Muestra_Direc: function () {
-      //FUNCION PARA MOSTRAR LA VENTANA PRINCIPAL.
+      //Jesús_Gabriel|->O.o|->>> >>:SE CREA FUNCION PARA MOSTRAR LA VENTANA PRINCIPAL.
       //this.$router.push('about');
       //window.location.href = "http://localhost:8080/about"
       this.Carga_Inicial();
@@ -802,18 +826,19 @@ export default {
       this.Muestra_Login = false;
     },
     Muestra_Direc_: function () {
+      //ABAEZ: SE CREA FUNCIÓN PARA MOSTRAR MAPA
       this.muestra_mapa = true;
       this.Entrega = false;
       this.muestra_observaciones = false;
     },
     Consultar_re: function () {
-      //FUNCION PARA CONSULTAR REGISTROS
+      //Jesús_Gabriel|->O.o|->>> >>: FUNCION PARA CONSULTAR REGISTROS
       //this.result = null
       const options = {
         method: "POST",
         url: "http://localhost:3000/api/users/login",
         headers: { "Content-Type": "application/json" },
-        data: { email: "roous.baez@gmail.com", password: "Baez12345" },
+        data: { email: "ros_anba@gmail.com", password: "12345" },
       };
       axios.request(options).then((response) => {
         this.Login = response.data.success;
@@ -836,26 +861,26 @@ export default {
       });
     },
     Eliminar_re: function () {
-      //FUNCIÓN PARA ELIMINAR UN REGISTRO EN ESPECIFICO
-      let ConsultaPro = document.getElementById("IDCONSULTA").value;
-      const options = {
+      //ABAEZ: SE CREA FUNCIÓN PARA ELIMINAR UN REGISTRO EN ESPECIFICO
+      let ConsultaPro = document.getElementById("IDCONSULTA").value; //EVALUA LO QUE CONTENGA EL INPUT
+      const options = {//SE CREA VARIABLE 
         method: "POST",
         url: "http://localhost:3000/api/users/login",
-        headers: { "Content-Type": "application/json" },
-        data: { email: "roous.baez@gmail.com", password: "Baez12345" },
+        headers: { "Content-Type": "application/json" },//ES DE TIPO JSON
+        data: { email: "roous.baez@gmail.com", password: "Baez12345" },// ES LO QUE CONTIENE EL API
       };
-      axios.request(options).then((response) => {
-        this.Login = response.data.success;
-        if (this.Login === true) {
+      axios.request(options).then((response) => {// SE EJECUTA EL API 
+        this.Login = response.data.success;// ESPERA RESPUESTA DE SUCCESS
+        if (this.Login === true) {// SI SON CORRECTAS LAS CREDENCIALES MUESTRA LA CONSULTA DE LO CONTRARIO
           if (!this.muestra_) {
             alert(
-              "Para eliminar un registro primero debe de realizar la consulta del mismo"
+              "Para eliminar un registro primero debe de realizar la consulta del mismo"//MUESTRA MENSAJE DE ADVERTENCIA
             );
           } else
             axios
-              .delete("http://localhost:4027/delete/" + ConsultaPro)
+              .delete("http://localhost:4027/delete/" + ConsultaPro)// DE SER CORRECTO TOMA URL DE ELIMINAR MAS LA CONSULTA
               .then((result) => {
-                this.result = result.data;
+                this.result = result.data;// MUESTRA ELIMINACIÓN DE DATO 
                 this.Carga_Inicial();
                 //location.reload();
               });
@@ -864,8 +889,9 @@ export default {
         }
       });
     },
+    
     Eliminar_re_Column: function (Idregistro) {
-      //FUNCIÓN PARA ELIMINAR UN REGISTRO EN ESPECIFICO
+      //Jesús_Gabriel|->O.o|->>> >>: SE CREA FUNCIÓN PARA ELIMINAR UN REGISTRO EN ESPECIFICO
       let ConsultaPro = Idregistro; //document.getElementById("IDCONSULTA").value;
       const options = {
         method: "POST",
@@ -892,7 +918,7 @@ export default {
       });
     },
     Muesra_Historial_Clientes: function () {
-      //FUNCIÓN PARA CONSULTAR REGISTRO DE HISTORIAL DE CLIENTES
+      //Jesús_Gabriel|->O.o|->>> >>: SE CREA FUNCIÓN PARA CONSULTAR REGISTRO DE HISTORIAL DE CLIENTES
       axios.get("http://localhost:4027/clientes/").then((result) => {
         this.muestra = false;
         this.muestra_ = false;
@@ -922,7 +948,7 @@ export default {
       //location.reload();
     },
     Actualizar_re: function () {
-      //FUNCIÓN PARA CONFIGURAR LA VENTANA EN MODO ACTUALIZACIÓN.
+      //Jesús_Gabriel|->O.o|->>> >>: FUNCIÓN PARA CONFIGURAR LA VENTANA EN MODO ACTUALIZACIÓN.
       if (!this.muestra_) {
         alert("Para actualizar un registro primero debe de consultar el mismo");
       } else {
@@ -950,7 +976,7 @@ export default {
       document.getElementById("CATEGORIAPRO").value = " ";
     },
     Insertar: function () {
-      //FUNCIÓN PARA INSERTAR UN NUEVO REGISTRO
+      //ABAEZ: SE CREA FUNCIÓN PARA INSERTAR UN NUEVO REGISTRO
       const options = {
         method: "POST",
         url: "http://localhost:3000/api/users/login",
@@ -959,14 +985,14 @@ export default {
       };
       axios.request(options).then((response) => {
         this.Login = response.data.success;
-        if (this.Login) {
+        if (this.Login) {//LOS CAMPOS DEBEN TRAER INFORMACIÓN
           let _ID = document.getElementById("IDCLAVEPROD").value;
           let _NOMBRE = document.getElementById("NOMBREPROD").value;
           let _IMAGEN = document.getElementById("IMAGENPROD").value;
           let _DESCIPCION = document.getElementById("DESCRIPCIONPROD").value;
           let _PRECIO = document.getElementById("PRECIOPROD").value;
           let _CATEGORIA = document.getElementById("CATEGORIAPRO").value;
-          if (
+          if (// SI VIENEN VACIOS 
             _ID === "" ||
             _NOMBRE === "" ||
             _IMAGEN === "" ||
@@ -974,7 +1000,7 @@ export default {
             _PRECIO === "" ||
             _CATEGORIA === ""
           ) {
-            alert("Debe de llenar todos los campos");
+            alert("Debe de llenar todos los campos");//MOSTRAR MENSAJE 
           } else
             axios
               .post(
@@ -1002,7 +1028,7 @@ export default {
       });
     },
     Insertar_Act: function () {
-      //FUNCIÓN PARA ACTUALIZAR UN REGISTRO.
+      //Jesús_Gabriel|->O.o|->>> >>:FUNCIÓN PARA ACTUALIZAR UN REGISTRO.
       const options = {
         method: "POST",
         url: "http://localhost:3000/api/users/login",
