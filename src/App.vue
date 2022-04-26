@@ -866,6 +866,7 @@ export default {
     },
     Eliminar_re_Column: function (Idregistro) {
       //FUNCIÓN PARA ELIMINAR UN REGISTRO EN ESPECIFICO
+      this.muestravenRe = false;
       let ConsultaPro = Idregistro; //document.getElementById("IDCONSULTA").value;
       const options = {
         method: "POST",
